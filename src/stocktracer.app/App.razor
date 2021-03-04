@@ -1,0 +1,54 @@
+﻿@using stocktracer.app.Components
+
+<div class="app">
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Stock Tracer App</a>
+        </div>
+    </nav>
+
+    <div class="project-stocks">
+        <div class="project-tools">
+            <div class="card m-30 project project-information">
+                <div class="card-header">
+                    Project information
+                </div>
+                <div class="card-body">
+                    <p>This project is a way to learning something about Blazor and pratice HTML/CSS.</p>
+                    <p>This project was created after watch the Coding Garden streaming a Javascript application. This application used WebSocket and Protobuf.</p>
+                    <p>In another live, from the same streamer, he created web app with Javascript where it integrate to Yahoo Web API to get Open-High-Low-Close prices during day</p>
+                </div>
+            </div>
+            <div class="card m-30 project">
+                <div class="card-header">
+                    Tools
+                </div>
+                <div class="card-body">
+                    <AddStockTool EventAddSymbol="AddSymbol"></AddStockTool>
+                </div>
+            </div>
+        </div>
+
+        <div class="stocks">
+        @foreach(var stock in stocks)
+        {
+            <Stock @key="stock.Symbol" Data="@stock" EventRemoveStock="RemoveStockBySymbol"></Stock>   
+        }
+        </div>
+    </div>
+
+</div>
+
+
+<!--
+    <Router AppAssembly="@typeof(Program).Assembly" PreferExactMatches="@true">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+    </Found>
+    <NotFound>
+        <LayoutView Layout="@typeof(MainLayout)">
+            <p>Sorry, there's nothing at this address.</p>
+        </LayoutView>
+    </NotFound>
+</Router>
+-->

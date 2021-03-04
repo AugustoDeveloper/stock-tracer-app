@@ -1,0 +1,55 @@
+.stock
+{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    padding: 15px 0px;
+    margin: 0px 20px;
+}
+
+.header-stock
+{
+    display: flex;
+    justify-content: end;
+}
+
+.badges
+{
+    display: flex;
+    justify-content: start;
+}
+
+.badges span
+{
+    margin: 0px 5px;
+    flex-grow: 1;
+}
+
+.badge-update
+{
+    flex-grow: 2 !important;
+}
+
+.badge-update:hover 
+{
+    cursor: pointer;
+}
+
+.price
+{
+    font-size: 10vmin;
+    width: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.price-red
+{
+    color: red;
+}
+
+.price-green
+{
+    color: green;
+}

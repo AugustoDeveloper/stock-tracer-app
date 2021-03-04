@@ -1,0 +1,6 @@
+<div class="mb-3">
+    <label for="symbol" class="form-label">Stock Symbol</label>
+    <input type="text" class="form-control" id="symbol" @bind="Symbol" aria-describedby="symbolHelp">
+    <div id="symbolHelp" class="form-text">Add new symbol to get Stock Information.</div>
+  </div>
+  <button type="button" class="btn btn-primary" @onclick="AddSymbolAsync">Add</button>

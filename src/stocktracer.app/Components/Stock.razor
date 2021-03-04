@@ -1,0 +1,19 @@
+<div class="stock">
+    <div class="header-stock">
+        <button type="button" class="btn-close btn-close-white" aria-label="Close" @onclick="RemoveAsync"></button>
+    </div>
+    <div class="price @PriceColorClass">
+        $@CurrentPriceFormatted
+    </div>
+    <div class="badges">
+        <span class="badge bg-light text-dark mb-3">@FirstTradeDate</span>
+        <span class="badge bg-light text-dark mb-3">@RegularMarketTime</span>
+        <span class="badge-update badge bg-light text-dark mb-3" @onclick="ForceUpdateChartAsync">
+            Updating chart in: @TimeToUpdateInSeconds seconds 
+        </span>
+    </div>
+    
+    <div id="@SymbolChart" class="chart">
+
+    </div>
+</div>
