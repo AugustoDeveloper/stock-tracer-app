@@ -1,1 +1,1 @@
-Stock Tracer App is deployed at: https://stock-tracer-app.herokuapp.com/
+Stock Tracer App is deployed at: https://stonks-tracer-app.herokuapp.com/

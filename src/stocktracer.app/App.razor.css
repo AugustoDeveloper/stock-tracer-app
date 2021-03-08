@@ -1,11 +1,17 @@
+.container-stocks
+{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    margin: 10px 10px;
+}
+
 .stocks
 {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: start;
-    padding-top: 15px;
+    flex-flow: column;
     height: 100%;
     width: 100%;
+    padding: 0px 20px;
 }
 
 .m-30
@@ -13,19 +19,16 @@
     margin: 30px;
 }
 
-.project-stocks
-{
-    display: flex;
-    padding-top: 15px;
-}
-
 .project-tools
 {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    padding: 0px 20px;
 }
+
 .project
 {
-    width: 500px;
-    padding: 15px 0px;
+    width: 100%;
+    margin: 10px 0px;
 }

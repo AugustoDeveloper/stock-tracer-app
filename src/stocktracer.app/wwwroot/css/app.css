@@ -3,6 +3,9 @@
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     background-color: black;
+    background-image: url('../images/stonks-bg.png');
+    background-size: 100%;
+    background-position: top;
 }
 
 a, .btn-link {
