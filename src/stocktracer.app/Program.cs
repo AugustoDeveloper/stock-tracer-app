@@ -16,15 +16,15 @@ namespace stocktracer.app
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("#app");
+            
 
             builder.Services.AddScoped(sp => 
             {
                 var http = new HttpClient 
-                { 
-                    BaseAddress = new Uri("https://cors.bridged.cc/https://query1.finance.yahoo.com/v8/finance/chart/"),
+                {
+                    BaseAddress = new Uri(builder.HostEnvironment.IsProduction() ? "https://stonks-tracer-api.herokuapp.com/" : "http://localhost:5002/"),
                 }; 
 
-                http.DefaultRequestHeaders.TryAddWithoutValidation("Origin", "bridged.xyz");
                 return http;
             });
 

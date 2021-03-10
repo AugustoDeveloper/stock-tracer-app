@@ -1,13 +1,19 @@
 .stock
 {
+    position: relative;
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 30%;
+    flex-basis: 300px;
+    flex-grow: 1;
+    margin: 10px 10px;
 }
+
 
 .header-stock
 {
     display: flex;
+    justify-content: flex-end;
 }
 
 .badges
@@ -19,12 +25,13 @@
 
 .badges span
 {
-    margin: 0px 5px;
+    margin-right: 5px;
     flex-grow: 1;
 }
 
 .badge-update
 {
+    margin-right: 0px;
     flex-grow: 2 !important;
 }
 
@@ -35,7 +42,7 @@
 
 .price
 {
-    font-size: 10vmin;
+    font-size: 5vmin;
     width: auto;
     display: flex;
     justify-content: center;
@@ -43,7 +50,7 @@
 
 .price-red
 {
-    color: deeppink;
+    color: red;
 }
 
 .price-green

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -25,7 +26,7 @@ namespace stocktracer.app.Components
         [Inject]
         private HttpClient Http { get; set; }
 
-        private string SymbolChart => $"chart-{this.Data.Symbol}";
+        private string SymbolChartId => $"chart-{this.Data.Symbol.Replace('.', '-')}";
         
         private DateTime LastUpdateChart { get; set; } = DateTime.MinValue;
 
@@ -65,19 +66,34 @@ namespace stocktracer.app.Components
 
         async private Task UpdateChartAsync()
         {
-            var stonk = await Http.GetFromJsonAsync<stocktracer.app.Integrations.Contracts.Stock>(Data.Symbol);
-            var meta = stonk.Chart.Results.First().Meta;
-            FirstTradeDate = meta.FirstTradeDate.ToDatetime();
-            RegularMarketTime = meta.RegularMarketTime.ToDatetime();
+            var finance = await Http.GetFromJsonAsync<SymbolFinance>("stock/"+Data.Symbol);
+            FirstTradeDate = finance.FirstTradeDate;
+            RegularMarketTime = finance.RegularMarketTime;
 
-            var dataSerie = this.GenerateDataSerie(stonk.Chart.Results.First());
+            var dataSerie = this.GenerateDataSerie(finance.Indicators);
 
-            await CurrentRuntime.InvokeAsync<string>("apexChart.renderChart", default, new object[] { Data.Symbol, $"chart-{Data.Symbol}", $"chart-{Data.Symbol}", dataSerie } );
-
-            if (Data.Price == -1)
+            try
             {
-                Data.Price = (float)meta.RegularMarketPrice;
+                await CurrentRuntime.InvokeAsync<string>(
+                    identifier: "apexChart.renderChart", 
+                    cancellationToken: default, 
+                    args: new object[] 
+                    { 
+                        Data.Symbol,//stockSymbol
+                        $"chart-{Data.Symbol.Replace('.', '-')}", //div chartId 
+                        $"chart-{Data.Symbol.Replace('.', '-')}", //svg chart id
+                        dataSerie // data
+                    } );
+
+                if (Data.Price == -1.0)
+                {
+                    Data.Price = (float)finance.RegularMarketPrice;
+                }
                 StateHasChanged();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
             }
         }
 
@@ -86,20 +102,19 @@ namespace stocktracer.app.Components
             await this.EventRemoveStock.InvokeAsync(this.Data.Symbol);
         }
 
-        private object[] GenerateDataSerie(stocktracer.app.Integrations.Contracts.Result result)
-            => result.Timestamps
-                .Select((t, i) => 
+        private object[] GenerateDataSerie(Collection<SymbolIndicatorValue> indicators)
+            => indicators
+                .Select(i => 
                 new 
                 {
-                    x = t * 1000,
+                    x = i.IndicatorTimestamp * 1000,
                     y = new[] 
                     { 
-                        result.Indicators.Quotes.First().Opens[i]?.ToString("#.##"),
-                        result.Indicators.Quotes.First().Highs[i]?.ToString("#.##"),
-                        result.Indicators.Quotes.First().Lows[i]?.ToString("#.##"),
-                        result.Indicators.Quotes.First().Closes[i]?.ToString("#.##"),
+                        i.Open?.ToString("#.##"),
+                        i.High?.ToString("#.##"),
+                        i.Low?.ToString("#.##"),
+                        i.Close?.ToString("#.##")
                     }
-
                 })
                 .ToArray();
 

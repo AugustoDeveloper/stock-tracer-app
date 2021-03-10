@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2C00FE47-709
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "stocktracer.app", "src\stocktracer.app\stocktracer.app.csproj", "{8B9FA012-9FD7-452D-8E44-0ECE1CF7071D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "stocktracer.api", "src\stocktracer.api\stocktracer.api.csproj", "{E1CD81D8-F612-4AFD-B3C3-F5FF40955E56}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,8 +34,21 @@ Global
 		{8B9FA012-9FD7-452D-8E44-0ECE1CF7071D}.Release|x64.Build.0 = Release|Any CPU
 		{8B9FA012-9FD7-452D-8E44-0ECE1CF7071D}.Release|x86.ActiveCfg = Release|Any CPU
 		{8B9FA012-9FD7-452D-8E44-0ECE1CF7071D}.Release|x86.Build.0 = Release|Any CPU
+		{E1CD81D8-F612-4AFD-B3C3-F5FF40955E56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1CD81D8-F612-4AFD-B3C3-F5FF40955E56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1CD81D8-F612-4AFD-B3C3-F5FF40955E56}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E1CD81D8-F612-4AFD-B3C3-F5FF40955E56}.Debug|x64.Build.0 = Debug|Any CPU
+		{E1CD81D8-F612-4AFD-B3C3-F5FF40955E56}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E1CD81D8-F612-4AFD-B3C3-F5FF40955E56}.Debug|x86.Build.0 = Debug|Any CPU
+		{E1CD81D8-F612-4AFD-B3C3-F5FF40955E56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1CD81D8-F612-4AFD-B3C3-F5FF40955E56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1CD81D8-F612-4AFD-B3C3-F5FF40955E56}.Release|x64.ActiveCfg = Release|Any CPU
+		{E1CD81D8-F612-4AFD-B3C3-F5FF40955E56}.Release|x64.Build.0 = Release|Any CPU
+		{E1CD81D8-F612-4AFD-B3C3-F5FF40955E56}.Release|x86.ActiveCfg = Release|Any CPU
+		{E1CD81D8-F612-4AFD-B3C3-F5FF40955E56}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8B9FA012-9FD7-452D-8E44-0ECE1CF7071D} = {2C00FE47-709F-4897-9A1D-BC022194A807}
+		{E1CD81D8-F612-4AFD-B3C3-F5FF40955E56} = {2C00FE47-709F-4897-9A1D-BC022194A807}
 	EndGlobalSection
 EndGlobal

@@ -15,8 +15,9 @@ namespace stocktracer.app.Components
 
         async private Task AddSymbolAsync()
         {
-            await EventAddSymbol.InvokeAsync(Symbol);
+            var symbol = Symbol.ToUpper();
             Symbol = string.Empty;
+            await EventAddSymbol.InvokeAsync(symbol);
         }
     }
 }

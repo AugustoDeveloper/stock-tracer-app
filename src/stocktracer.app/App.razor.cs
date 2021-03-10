@@ -11,7 +11,6 @@ using Microsoft.JSInterop;
 using stocktracer.app.Protos;
 using  Microsoft.AspNetCore.WebUtilities;
 using stocktracer.app.Integrations;
-using stocktracer.app.Integrations.Contracts;
 using stocktracer.app.Models;
 using System.Collections.Generic;
 
@@ -36,6 +35,18 @@ namespace stocktracer.app
 
             stocks.AddRange(symbols.Select(symbol => new StockTrack { Symbol = symbol }));
 
+            await ConnectWebSocketAsync();
+
+            await base.OnInitializedAsync();
+        }
+
+        async private Task ConnectWebSocketAsync()
+        {
+            if (clientSocket != null)
+            {
+                clientSocket.Dispose();
+            }
+
             clientSocket = new WebSocketIntegrationClient(
                 new ClientWebSocket(), 
                 new Uri("wss://streamer.finance.yahoo.com"), 
@@ -44,8 +55,6 @@ namespace stocktracer.app
             clientSocket.OnReceiveMessage += ExecuteReceivingMessage;
             clientSocket.OnConnected += ExecuteWebSocketConnected;
             await clientSocket.ConnectAsync();
-
-            await base.OnInitializedAsync();
         }
 
         private void ExecuteWebSocketConnected()
@@ -60,6 +69,8 @@ namespace stocktracer.app
                 Console.WriteLine("Connected");
 
                 var payload = JsonSerializer.Serialize(subscription);
+
+                Console.WriteLine(payload);
                 this.clientSocket.SendStringAsync(payload, default);
             }
             catch(Exception ex)
@@ -95,18 +106,22 @@ namespace stocktracer.app
             }
         }
 
-        private void RemoveStockBySymbol(string symbol)
+        async private Task RemoveStockBySymbol(string symbol)
         {
             this.stocks.RemoveAll(s => string.Equals(s.Symbol, symbol, StringComparison.InvariantCultureIgnoreCase));
+            await ConnectWebSocketAsync();
         }
 
-        private void AddSymbol(string symbol)
+        async private Task AddSymbol(string symbol)
         {
             if (!this.stocks.Any(s => string.Equals(s.Symbol, symbol, StringComparison.InvariantCultureIgnoreCase)))
+            {
                 this.stocks.Add(new StockTrack
                 {
                     Symbol = symbol
                 });
+                await ConnectWebSocketAsync();
+            }
         }
     }
 }

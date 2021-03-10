@@ -1,4 +1,14 @@
 (function() {
+    window.bootstrapToast = {
+      init: function() {
+        console.log('init...');
+            var toastElList = [].slice.call(document.querySelectorAll('.toast'));
+            console.log(toastElList);
+            var toastList = toastElList.map(function (toastEl) {
+            return new bootstrap.Toast(toastEl, option)
+            });
+      }
+    };
     window.apexChart = {
         renderChart: function(stonkSymbol, chartId, chartSelector, dataSeries) {
           var newDataSeries = dataSeries.map(function(d) {
@@ -8,9 +18,10 @@
             };
           });
 
-          console.log(newDataSeries);
-
-          if (document.querySelector(`#${chartSelector}`).children.length > 0) {
+          let charDiv = document.querySelector(`#${chartSelector}`);
+          if ( charDiv && 
+               charDiv.children &&
+               charDiv.children.length > 0) {
             
             ApexCharts.exec(chartId, 'updateSeries', [{
               data: newDataSeries
@@ -59,8 +70,12 @@
                 }
               }
             };
+
+            let chartSelectorDiv = document.querySelector(`#${chartSelector}`);
+            console.log(chartSelectorDiv);
+            console.log(chartSelector);
       
-            var chart = new ApexCharts(document.querySelector(`#${chartSelector}`), options);
+            var chart = new ApexCharts(chartSelectorDiv, options);
             chart.render();
           }
         }

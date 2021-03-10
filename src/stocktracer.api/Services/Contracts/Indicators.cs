@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace stocktracer.app.Integrations.Contracts
+namespace Stocktracer.Api.Services.Contracts
 {
     public class Indicators
     {

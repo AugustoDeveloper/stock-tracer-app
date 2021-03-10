@@ -90,5 +90,10 @@ namespace stocktracer.app.Integrations
             var buffer = new ArraySegment<byte>(encoded, 0, encoded.Length);
             return websocket.SendAsync(buffer, WebSocketMessageType.Text, endOfMessage: true, cancellation);
         }
+
+        public void Dispose()
+        {
+            this.websocket.Dispose();
+        }
     }
 }

@@ -1,34 +1,21 @@
-.container-stocks
+main 
 {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    margin: 10px 10px;
+    grid-template-columns: 1fr;
+    z-index: 4;
+}
+
+header
+{
+    padding-left: 30px;
+    padding-top: 60px;
+    color: white;
 }
 
 .stocks
 {
+    padding: 0px 30px;
     display: flex;
-    flex-flow: column;
-    height: 100%;
-    width: 100%;
-    padding: 0px 20px;
-}
-
-.m-30
-{
-    margin: 30px;
-}
-
-.project-tools
-{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0px 20px;
-}
-
-.project
-{
-    width: 100%;
-    margin: 10px 0px;
+    flex-flow: row wrap;
+    font-family: 'DotGothic16';
 }
